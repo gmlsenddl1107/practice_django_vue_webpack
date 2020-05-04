@@ -35,7 +35,7 @@
 
         <v-content class="ma-3">
 
-            <router-view></router-view>
+            <router-view v-on:loginok="loginok"></router-view>
 
 
         </v-content>
@@ -67,7 +67,10 @@
                 localStorage.removeItem('user-token');
                 this.token = null;
                 router.push({ path: '/login' })
-            }
+            },
+            loginok:function () {
+                this.token = localStorage.getItem('user-token');
+            },
 
         }
     }

@@ -66,15 +66,16 @@
                 }).then(resp => {
 
                     this.token = resp.data.token;
-                    console.log(this.token);
                     localStorage.setItem('user-token', resp.data.token);
+                    this.$emit('loginok');
                     router.push({ path: '/' })
                 }).catch(err => {
                     localStorage.removeItem('user-token');
                     this.message = err.toString();
-                    console.log(err);
+                    this.$emit('loginok');
                 })
             },
+
         },
         created: function () {
             this.token = TokenService.getToken() || null;
