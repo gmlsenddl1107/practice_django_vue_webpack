@@ -5,7 +5,7 @@
                 fluid
         >
             <v-row
-                    align="center"
+
                     justify="center"
             >
                 <v-col
@@ -22,21 +22,20 @@
                             <v-toolbar-title>Login form</v-toolbar-title>
                             <v-spacer/>
                         </v-toolbar>
+
                         <v-card-text>
-                            <b-nav-form @submit.prevent="login" v-if="token==null">
-                                <b-form-input id="username" size="sm" class="mr-sm-2" v-model="username"
-                                              placeholder="username"
-                                              name="username"></b-form-input>
-                                <b-form-input id="password" size="sm" class="mr-sm-2" placeholder="password"
-                                              type="password"
-                                              v-model="password" name="password"></b-form-input>
-                            </b-nav-form>
+                            <v-form @submit.prevent="login" v-if="token==null">
+                                <v-text-field  name="Username" label="Username" v-model="username"></v-text-field>
+                                <v-text-field name="Password" label="Password" type="password" v-model="password">></v-text-field>
+                                <v-card-actions>
+                                    <v-btn primary large block v-on:click="login" >Login</v-btn>
+                                </v-card-actions></v-form>
+                            <v-alert v-if="message!=null" color="red">
+                                {{message}}
+                            </v-alert>
                         </v-card-text>
-                        <v-card-actions>
-                            <v-spacer/>
-                            <v-btn color="primary" v-on:click="login">Login</v-btn>
-                        </v-card-actions>
                     </v-card>
+
                 </v-col>
             </v-row>
         </v-container>
@@ -55,6 +54,7 @@
                 token: null,
                 username: '',
                 password: '',
+                message: null
 
             }
         },
@@ -71,13 +71,14 @@
                     router.push({ path: '/' })
                 }).catch(err => {
                     localStorage.removeItem('user-token');
+                    this.message = err.toString();
                     console.log(err);
                 })
             },
         },
         created: function () {
             this.token = TokenService.getToken() || null;
-            console.log("token:", this.token);
+
 
         }
 
