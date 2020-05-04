@@ -9,14 +9,6 @@ from django.contrib.auth.models import User
 from rest_framework.authentication import TokenAuthentication
 
 
-# Create your views here.
-# class GpuStatusViewSet(viewsets.ModelViewSet):
-#     queryset = GpuStatus.objects.raw('SELECT * FROM gpu_monitoring_article  where (id,server_name ) IN  (SELECT MAX(id,server_name ) FROM gpu_monitoring_article group by(server_name)) group by server_name
-#     serializer_class = GpuStatusSerializer
-#     authentication_class = (TokenAuthentication,)
-#     permission_classes = (IsAuthenticated,)
-#     print(queryset)
-
 
 class VideoViewSet(viewsets.ModelViewSet):
     queryset = Video.objects.all()
