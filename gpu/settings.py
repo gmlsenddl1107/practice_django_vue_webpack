@@ -16,7 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),os.path.join(FRONTEND_DIR, 'dist'),)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -27,7 +27,7 @@ SECRET_KEY = 'y2c5bq%lcskjoji8#)wbppd55)zm#4k^)zcso@qc121nv(iu7$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1','0.0.0.0']
 
 # Application definition
 
@@ -79,7 +79,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # 해당 url에서 오는 request의 경우 장고 backend로 보내도록 허용
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8080',
+    'http://localhost:8080','http://localhost:8000','http://127.0.0.1:8080','http://127.0.0.1:8000',
 ]
 
 # Database
@@ -131,7 +131,7 @@ STATIC_URL = '/static/'
 WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': 'bundles/',  # must end with slash
+        'BUNDLE_DIR_NAME': '',  # must end with slash
         'STATS_FILE': os.path.join(FRONTEND_DIR, 'webpack-stats.json'),
     }
 }
